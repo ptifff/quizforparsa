@@ -2,23 +2,60 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
-  runApp(AdminPanel());
+  runApp(TopicSelection());
 }
 
-class AdminPanel extends StatelessWidget {
+class TopicSelection extends StatelessWidget {
   final currentUser = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      // drawer:Drawer(
+      //   child: Column(
+      //     children: [
+      //       StreamBuilder(
+      //           stream: FirebaseFirestore.instance.collection("Users").
+      //           where("uid",isEqualTo: currentUser.currentUser!.uid).snapshots(),
+      //            builder: (context,AsyncSnapshot<QuerySnapshot> snapshot){
+      //         if(snapshot.hasData){
+      //           return ListView.builder(
+      //               itemCount:snapshot.data!.docs.length,
+      //               shrinkWrap: true,
+      //               itemBuilder: (context,i){
+      //                 var data = snapshot.data!.docs[i];
+      //                 return UserAccountsDrawerHeader(accountName: Text(data['name']), accountEmail:Text(data['email']));
+      //           });
+      //         }else{
+      //           return CircularProgressIndicator();
+      //         }
+      //       })
+      //     ],
+      //   ),
+      // ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       FeatureDrawerButton( text: 'Gather Knowledge', onTap: () {
+      //         Navigator.of(context).pushNamed('/learning_material');
+      //       },),
+      //       FeatureDrawerButton( text: 'Test Knowledge', onTap: () {
+      //         Navigator.of(context).pushNamed('/instructor_booking');
+      //       },),
+      //       FeatureDrawerButton( text: 'Profile', onTap: () {
+      //         Navigator.of(context).pushNamed('/learner_scheduling'); },),
+      //       FeatureDrawerButton( text: 'Logout', onTap: () {  },),
+      //     ],
+      //   ),
+      // ),
       appBar: AppBar(
-        title: Text('Admin Topic Selection'),
-        actions: [IconButton(onPressed: (){
-          // AuthService authService = AuthService();
-          // authService.logOutUser(context);
-        },
-            icon: Icon(Icons.logout))],
+        title: Text('User Panel '),
+        // actions: [IconButton(onPressed: (){
+        //   SignInController authService = SignInController();
+        //   SignInController.logOutUser(context);
+        // },
+        //     icon: Icon(Icons.logout))],
       ),
       body: Container(
         color: Colors.white,
@@ -78,11 +115,11 @@ class PanelCard extends StatelessWidget {
   void _handlePanelTap(BuildContext context) {
     if (label == 'Gather Knowledge') {
       // Navigate to the "Gather Knowledge" screen or perform your action.
-      Navigator.pushNamed(context, '/gatherknowledge_admin');
-
+      Navigator.pushNamed(context, '/gatherknowledge_user');
     } else if (label == 'Test Knowledge') {
       // Navigate to the "Test Knowledge" screen or perform your action.
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamed(context, '/home_student');
+
     }
   }
 
@@ -129,7 +166,10 @@ class FeatureDrawerButton extends StatelessWidget {
   final String text;
   final Function() onTap;
 
+
+
   FeatureDrawerButton({
+
     required this.text,
     required this.onTap,
   });

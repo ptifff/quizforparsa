@@ -1,9 +1,13 @@
+import 'package:demo_flutter/views/gather_knowledge_admin.dart';
+import 'package:demo_flutter/views/gather_knowledge_user.dart';
 import 'package:demo_flutter/views/home.dart';
 import 'package:demo_flutter/views/signin.dart';
+import 'package:demo_flutter/views/testknowledge_user.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'helper/functions.dart';
+import 'views/home_student.dart';
 import 'views/login.dart';
 import 'views/splash_screen.dart';
 
@@ -50,11 +54,14 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/splash_screen',
       routes: {
         '/splash_screen': (context) => SplashScreen(),
-        // '/gatherknowledge_admin': (context) => GatherKnowledgeAdmin(),
-        // '/testknowledge_admin': (context) => TestKnowledgeAdmin(),
-        // '/create_quiz': (context) => CreateQuiz(),
-        // '/gatherknowledge_user': (context) => GatherKnowledgeUser(),
-        // '/testknowledge_user': (context) => TestKnowledgeUser(),
+        '/gatherknowledge_admin': (context) => GatherKnowledgeAdmin(),
+         '/home': (context) => Home(),
+        '/home_student': (context) => HomeStudent(),
+
+        '/gatherknowledge_user': (context) => GatherKnowledgeUser(),
+         '/testknowledge_user': (context) => TestKnowledgeUser(),
+        '/testknowledge_user': (context) => TestKnowledgeUser(),
+
       },
 
     );

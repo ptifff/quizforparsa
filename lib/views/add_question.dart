@@ -32,7 +32,7 @@ class _AddQuestionState extends State<AddQuestion> {
 
       questionId = randomAlphaNumeric(16);
 
-      Map<String, String> questionData = {
+      Map<String, dynamic> questionData = {
         "question" : question,
         "option1" : option1,
         "option2" : option2,
