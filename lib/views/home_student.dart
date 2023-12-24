@@ -19,7 +19,7 @@ class HomeStudent extends StatefulWidget {
 class _HomeStudentState extends State<HomeStudent> {
   Stream quizStream = Stream.empty();
 
-  AuthService _authService = new AuthService();
+  // AuthService _authService = new AuthService();
 
   DatabaseService _databaseService = new DatabaseService(uid: '', email: '');
 
@@ -81,7 +81,10 @@ class _HomeStudentState extends State<HomeStudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBar(context),
+        title: Text('Lets Learn Together'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        elevation: 0.0,
         actions: [
           IconButton(
             onPressed: () {
@@ -93,8 +96,6 @@ class _HomeStudentState extends State<HomeStudent> {
             ),
           )
         ],
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
       ),
       body: _isLoading
           ? Container(

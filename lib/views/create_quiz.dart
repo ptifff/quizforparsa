@@ -54,7 +54,10 @@ class _CreateQuizState extends State<CreateQuiz> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: appBar(context),
+        title: Text('Lets Learn Together'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        elevation: 0.0,
         actions: [
           IconButton(
             onPressed: () {
@@ -67,8 +70,6 @@ class _CreateQuizState extends State<CreateQuiz> {
           )
         ],
         iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
       ),
       body: _isLoading
           ? Container(
@@ -122,7 +123,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                   context,
                   "Create Quiz",
                   MediaQuery.of(context).size.width - 48,
-                  Colors.deepOrangeAccent,
+                  Colors.blue,
                 ),
               ),
               SizedBox(height: 40.0),

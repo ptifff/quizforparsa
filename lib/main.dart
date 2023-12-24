@@ -1,6 +1,7 @@
 import 'package:demo_flutter/views/gather_knowledge_admin.dart';
 import 'package:demo_flutter/views/gather_knowledge_user.dart';
 import 'package:demo_flutter/views/home.dart';
+import 'package:demo_flutter/views/inlog_ui.dart';
 import 'package:demo_flutter/views/signin.dart';
 import 'package:demo_flutter/views/testknowledge_user.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: _isLoggedIn ?? false ? Home() : Login(),
+      home: _isLoggedIn ?? false ? Home() : SignInScreen(),
       initialRoute: '/splash_screen',
       routes: {
         '/splash_screen': (context) => SplashScreen(),

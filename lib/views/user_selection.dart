@@ -50,7 +50,12 @@ class TopicSelection extends StatelessWidget {
       //   ),
       // ),
       appBar: AppBar(
-        title: Text('User Panel '),
+        title: Text('Lets Learn Together'),
+        centerTitle: true,
+        automaticallyImplyLeading: false, // Set to false to remove the back button
+        backgroundColor: Colors.blue,
+        elevation: 0.0,
+
         // actions: [IconButton(onPressed: (){
         //   SignInController authService = SignInController();
         //   SignInController.logOutUser(context);
@@ -77,11 +82,11 @@ class TopicSelection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: 160.0,
+                  width: 150.0,
                   height: 150.0,
                   child: PanelCard(
                     icon: Icons.book,
-                    label: 'Gather Knowledge',
+                    label: 'Article',
                   ),
                 ),
                 SizedBox(width: 20.0),
@@ -90,7 +95,7 @@ class TopicSelection extends StatelessWidget {
                   height: 150.0,
                   child: PanelCard(
                     icon: Icons.book,
-                    label: 'Test Knowledge',
+                    label: 'Quiz',
                   ),
                 ),
               ],
@@ -113,10 +118,10 @@ class PanelCard extends StatelessWidget {
   });
 
   void _handlePanelTap(BuildContext context) {
-    if (label == 'Gather Knowledge') {
+    if (label == 'Article') {
       // Navigate to the "Gather Knowledge" screen or perform your action.
       Navigator.pushNamed(context, '/gatherknowledge_user');
-    } else if (label == 'Test Knowledge') {
+    } else if (label == 'Quiz') {
       // Navigate to the "Test Knowledge" screen or perform your action.
       Navigator.pushNamed(context, '/home_student');
 

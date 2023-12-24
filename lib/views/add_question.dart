@@ -55,9 +55,9 @@ class _AddQuestionState extends State<AddQuestion> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: appBar(context),
-        iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.transparent,
+        title: Text('Lets Learn Together'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
         elevation: 0.0,
       ),
       body: _isLoading ? Container(
@@ -148,7 +148,7 @@ class _AddQuestionState extends State<AddQuestion> {
                       onTap: (){
                         Navigator.pop(context);
                       },
-                      child: orangeButton(context, "Submit", MediaQuery.of(context).size.width/2 - 36, Colors.deepOrangeAccent)
+                      child: orangeButton(context, "Submit", MediaQuery.of(context).size.width/2 - 36, Colors.blue)
                   ),
                   SizedBox(width: 24,),
                   GestureDetector(

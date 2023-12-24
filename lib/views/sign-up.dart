@@ -29,6 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
       return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false, // Set to false to remove the back button
             backgroundColor: AppConstant.appScendoryColor,
             centerTitle: true,
             title: Text(

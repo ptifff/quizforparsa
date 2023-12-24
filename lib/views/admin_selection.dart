@@ -13,7 +13,12 @@ class AdminPanel extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Admin Topic Selection'),
+        title: Text('Lets Learn Together'),
+        centerTitle: true,
+        automaticallyImplyLeading: false, // Set to false to remove the back button
+        backgroundColor: Colors.blue,
+        elevation: 0.0,
+
         actions: [IconButton(onPressed: (){
           // AuthService authService = AuthService();
           // authService.logOutUser(context);
@@ -40,20 +45,20 @@ class AdminPanel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: 160.0,
-                  height: 150.0,
-                  child: PanelCard(
-                    icon: Icons.book,
-                    label: 'Gather Knowledge',
-                  ),
-                ),
-                SizedBox(width: 20.0),
-                Container(
                   width: 150.0,
                   height: 150.0,
                   child: PanelCard(
                     icon: Icons.book,
-                    label: 'Test Knowledge',
+                    label: 'Create Articles',
+                  ),
+                ),
+                SizedBox(width: 20.0),
+                Container(
+                  width: 140.0,
+                  height: 150.0,
+                  child: PanelCard(
+                    icon: Icons.book,
+                    label: 'Create Quiz',
                   ),
                 ),
               ],
@@ -76,11 +81,11 @@ class PanelCard extends StatelessWidget {
   });
 
   void _handlePanelTap(BuildContext context) {
-    if (label == 'Gather Knowledge') {
+    if (label == 'Create Articles') {
       // Navigate to the "Gather Knowledge" screen or perform your action.
       Navigator.pushNamed(context, '/gatherknowledge_admin');
 
-    } else if (label == 'Test Knowledge') {
+    } else if (label == 'Create Quiz') {
       // Navigate to the "Test Knowledge" screen or perform your action.
       Navigator.pushNamed(context, '/home');
     }

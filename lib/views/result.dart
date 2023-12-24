@@ -1,7 +1,10 @@
+import 'package:demo_flutter/views/user_selection.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/widgets.dart';
+import 'admin_selection.dart';
 import 'home.dart';
+import 'home_student.dart';
 
 class Results extends StatefulWidget {
 
@@ -31,7 +34,7 @@ class _ResultsState extends State<Results> {
                 SizedBox(height: 20,),
                 GestureDetector(
                     onTap: (){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TopicSelection()));
                     },
                     child: orangeButton(context, "Go To Home", MediaQuery.of(context).size.width/2, Colors.blueAccent)
                 ),

@@ -97,7 +97,7 @@ class _PlayQuizState extends State<PlayQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz App'),
+        title: Text('Lets Learn Together'),
         centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: 0.0,
