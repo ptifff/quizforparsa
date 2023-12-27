@@ -142,23 +142,36 @@ class _AddQuestionState extends State<AddQuestion> {
                 },
               ),
 
-              Row(
+              Column(
                 children: [
+                  SizedBox(height: 20), // Add some space at the top
+
                   GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: orangeButton(context, "Submit", MediaQuery.of(context).size.width/2 - 36, Colors.blue)
+                    onTap: () {
+                      _uploadQuestionData();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12), // Adjust the padding as needed
+                      child: orangeButton(context, "Add Question", MediaQuery.of(context).size.width / 2 - 36, Colors.blue),
+                    ),
                   ),
-                  SizedBox(width: 24,),
+
+                  SizedBox(height: 12), // Adjust the height of the SizedBox for vertical spacing
+
                   GestureDetector(
-                      onTap: (){
-                        _uploadQuestionData();
-                      },
-                      child: orangeButton(context, "Add Question", MediaQuery.of(context).size.width/2 - 36, Colors.blueAccent)
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12), // Adjust the padding as needed
+                      child: orangeButton(context, "Submit", MediaQuery.of(context).size.width / 2 - 36, Colors.blue),
+                    ),
                   ),
-                ]
+
+                  SizedBox(height: 40.0), // Add some space at the bottom
+                ],
               ),
+
               SizedBox(height: 40.0)
             ],
           ),

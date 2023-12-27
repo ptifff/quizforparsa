@@ -10,6 +10,8 @@ import '../services/auth.dart';
 import '../services/database.dart';
 import '../widgets/widgets.dart';
 import 'create_quiz.dart';
+import 'inlog_ui.dart';
+import 'play_quiz_student.dart';
 
 class HomeStudent extends StatefulWidget {
   @override
@@ -88,11 +90,11 @@ class _HomeStudentState extends State<HomeStudent> {
         actions: [
           IconButton(
             onPressed: () {
-              // Add your sign out logic here
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
             },
             icon: Icon(
               Icons.exit_to_app,
-              color: Colors.black87,
+              color: Colors.white,
             ),
           )
         ],
@@ -135,7 +137,7 @@ class QuizTile extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) {
-            return PlayQuiz(quizId);
+            return PlayQuizStudent(quizId);
           }),
         );
       },

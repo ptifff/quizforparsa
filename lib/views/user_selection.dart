@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'inlog_ui.dart';
+
 
 void main() {
   runApp(TopicSelection());
@@ -56,11 +58,17 @@ class TopicSelection extends StatelessWidget {
         backgroundColor: Colors.blue,
         elevation: 0.0,
 
-        // actions: [IconButton(onPressed: (){
-        //   SignInController authService = SignInController();
-        //   SignInController.logOutUser(context);
-        // },
-        //     icon: Icon(Icons.logout))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+            },
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
       body: Container(
         color: Colors.white,

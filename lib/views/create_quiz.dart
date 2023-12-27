@@ -58,19 +58,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: 0.0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => QuizList()),
-              );
-            },
-            icon: Icon(Icons.list_alt_sharp, color: Colors.black87),
-          )
-        ],
-        iconTheme: IconThemeData(color: Colors.black87),
-      ),
+              ),
       body: _isLoading
           ? Container(
         child: Center(
@@ -114,7 +102,8 @@ class _CreateQuizState extends State<CreateQuiz> {
                   return val!.isEmpty ? "Enter quiz description" : null;
                 },
               ),
-              Spacer(),
+              SizedBox(height: 60.0),
+
               GestureDetector(
                 onTap: () {
                   _createQuizOnline();

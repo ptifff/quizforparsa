@@ -34,7 +34,7 @@ class _ResultsState extends State<Results> {
                 SizedBox(height: 20,),
                 GestureDetector(
                     onTap: (){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TopicSelection()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AdminPanel()));
                     },
                     child: orangeButton(context, "Go To Home", MediaQuery.of(context).size.width/2, Colors.blueAccent)
                 ),

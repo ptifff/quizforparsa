@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'inlog_ui.dart';
+
 void main() {
   runApp(AdminPanel());
 }
@@ -20,8 +22,7 @@ class AdminPanel extends StatelessWidget {
         elevation: 0.0,
 
         actions: [IconButton(onPressed: (){
-          // AuthService authService = AuthService();
-          // authService.logOutUser(context);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
         },
             icon: Icon(Icons.logout))],
       ),
