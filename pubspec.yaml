@@ -40,6 +40,7 @@ dependencies:
   firebase_analytics: ^10.7.0
   flutter_keyboard_visibility: ^5.4.1
   flutter_easyloading: ^3.0.5
+  rename: ^3.0.1
 
 
   flutter:
