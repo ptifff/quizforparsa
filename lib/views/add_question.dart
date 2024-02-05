@@ -17,7 +17,7 @@ class AddQuestion extends StatefulWidget {
 class _AddQuestionState extends State<AddQuestion> {
 
   final _formKey = GlobalKey<FormState>();
-  String question="", option1="", option2="", option3="", option4="", correctAnswer="", questionId="";
+  String question="", answer="", o2="", o3="", o4="", questionId="";
 
   bool _isLoading = false;
 
@@ -34,11 +34,10 @@ class _AddQuestionState extends State<AddQuestion> {
 
       Map<String, dynamic> questionData = {
         "question" : question,
-        "option1" : option1,
-        "option2" : option2,
-        "option3" : option3,
-        "option4" : option4,
-        "correctAnswer" : correctAnswer,
+        "answer" : answer,
+        "o2" : o2,
+        "o3" : o3,
+        "o4" : o4,
         "questionId" : questionId
       };
 
@@ -84,10 +83,10 @@ class _AddQuestionState extends State<AddQuestion> {
               SizedBox(height: 6,),
               TextFormField(
                 decoration: InputDecoration(
-                    hintText: "Option one"
+                    hintText: " Answer"
                 ),
                 onChanged: (val){
-                  option1 = val;
+                  answer = val;
                 },
                 validator: (val){
                   return val!.isEmpty ? "Enter option one" : null;
@@ -96,10 +95,10 @@ class _AddQuestionState extends State<AddQuestion> {
               SizedBox(height: 6,),
               TextFormField(
                 decoration: InputDecoration(
-                    hintText: "Option two"
+                    hintText: "Option 2"
                 ),
                 onChanged: (val){
-                  option2 = val;
+                  o2 = val;
                 },
                 validator: (val){
                   return val!.isEmpty ? "Enter option two" : null;
@@ -108,10 +107,10 @@ class _AddQuestionState extends State<AddQuestion> {
               SizedBox(height: 6,),
               TextFormField(
                 decoration: InputDecoration(
-                    hintText: "Option three"
+                    hintText: "Option 3"
                 ),
                 onChanged: (val){
-                  option3 = val;
+                  o3 = val;
                 },
                 validator: (val){
                   return val!.isEmpty ? "Enter option three" : null;
@@ -120,27 +119,17 @@ class _AddQuestionState extends State<AddQuestion> {
               SizedBox(height: 6,),
               TextFormField(
                 decoration: InputDecoration(
-                    hintText: "Option four"
+                    hintText: "Option 4"
                 ),
                 onChanged: (val){
-                  option4 = val;
+                  o4 = val;
                 },
                 validator: (val){
                   return val!.isEmpty ? "Enter option four" : null;
                 },
               ),
               SizedBox(height: 6,),
-              TextFormField(
-                decoration: InputDecoration(
-                    hintText: "Correct answer"
-                ),
-                onChanged: (val){
-                  correctAnswer = val;
-                },
-                validator: (val){
-                  return val!.isEmpty ? "Enter correct answer" : null;
-                },
-              ),
+
 
               Column(
                 children: [

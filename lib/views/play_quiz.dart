@@ -37,20 +37,19 @@ class _PlayQuizState extends State<PlayQuiz> {
       questionModel.question = data["question"] as String;
 
       List<String> options = [
-        data["option1"] as String,
-        data["option2"] as String,
-        data["option3"] as String,
-        data["option4"] as String,
+        data["answer"] as String,
+        data["o2"] as String,
+        data["o3"] as String,
+        data["o4"] as String,
       ];
       options.shuffle();
 
-      questionModel.option1 = options[0];
-      questionModel.option2 = options[1];
-      questionModel.option3 = options[2];
-      questionModel.option4 = options[3];
+      questionModel.answer = options[0];
+      questionModel.o2 = options[1];
+      questionModel.o3 = options[2];
+      questionModel.o4 = options[3];
 
-      questionModel.correctOption = data["correctAnswer"] as String;
-      questionModel.correctAnswer = data["correctAnswer"] as String;
+      questionModel.correctOption = data["answer"] as String;
       questionModel.answered = false;
     }
 
@@ -243,15 +242,15 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
         GestureDetector(
           onTap: () {
             if (!widget.questionModel.answered) {
-              if (widget.questionModel.option1 ==
+              if (widget.questionModel.answer ==
                   widget.questionModel.correctOption) {
-                optionSelected = widget.questionModel.option1;
+                optionSelected = widget.questionModel.answer;
                 widget.questionModel.answered = true;
                 _correct = _correct + 1;
                 _notAttempted = _notAttempted - 1;
                 setState(() {});
               } else {
-                optionSelected = widget.questionModel.option1;
+                optionSelected = widget.questionModel.answer;
                 widget.questionModel.answered = true;
                 _incorrect = _incorrect + 1;
                 _notAttempted = _notAttempted - 1;
@@ -261,23 +260,23 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
           },
           child: OptionTile(
               option: "A",
-              description: widget.questionModel.option1,
-              correctAnswer: widget.questionModel.correctAnswer,
+              description: widget.questionModel.answer,
+              correctAnswer: widget.questionModel.answer,
               optionSelected: optionSelected),
         ),
         SizedBox(height: 4,),
         GestureDetector(
         onTap: () {
       if (!widget.questionModel.answered) {
-        if (widget.questionModel.option2 ==
+        if (widget.questionModel.o2 ==
             widget.questionModel.correctOption) {
-          optionSelected = widget.questionModel.option2;
+          optionSelected = widget.questionModel.o2;
           widget.questionModel.answered = true;
           _correct = _correct + 1;
           _notAttempted = _notAttempted - 1;
           setState(() {});
         } else {
-          optionSelected = widget.questionModel.option2;
+          optionSelected = widget.questionModel.o2;
           widget.questionModel.answered = true;
           _incorrect = _incorrect + 1;
           _notAttempted = _notAttempted - 1;
@@ -287,23 +286,23 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
         },
           child: OptionTile(
               option: "B",
-              description: widget.questionModel.option2,
-              correctAnswer: widget.questionModel.correctAnswer,
+              description: widget.questionModel.o2,
+              correctAnswer: widget.questionModel.answer,
               optionSelected: optionSelected),
         ),
             SizedBox(height: 4,),
             GestureDetector(
               onTap: () {
                 if (!widget.questionModel.answered) {
-                  if (widget.questionModel.option3 ==
+                  if (widget.questionModel.o3 ==
                       widget.questionModel.correctOption) {
-                    optionSelected = widget.questionModel.option3;
+                    optionSelected = widget.questionModel.o3;
                     widget.questionModel.answered = true;
                     _correct = _correct + 1;
                     _notAttempted = _notAttempted - 1;
                     setState(() {});
                   } else {
-                    optionSelected = widget.questionModel.option3;
+                    optionSelected = widget.questionModel.o3;
                     widget.questionModel.answered = true;
                     _incorrect = _incorrect + 1;
                     _notAttempted = _notAttempted - 1;
@@ -313,23 +312,23 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               },
               child: OptionTile(
                   option: "C",
-                  description: widget.questionModel.option3,
-                  correctAnswer: widget.questionModel.correctAnswer,
+                  description: widget.questionModel.o3,
+                  correctAnswer: widget.questionModel.answer,
                   optionSelected: optionSelected),
             ),
             SizedBox(height: 4,),
             GestureDetector(
               onTap: () {
                 if (!widget.questionModel.answered) {
-                  if (widget.questionModel.option4 ==
+                  if (widget.questionModel.o4 ==
                       widget.questionModel.correctOption) {
-                    optionSelected = widget.questionModel.option4;
+                    optionSelected = widget.questionModel.o4;
                     widget.questionModel.answered = true;
                     _correct = _correct + 1;
                     _notAttempted = _notAttempted - 1;
                     setState(() {});
                   } else {
-                    optionSelected = widget.questionModel.option4;
+                    optionSelected = widget.questionModel.o4;
                     widget.questionModel.answered = true;
                     _incorrect = _incorrect + 1;
                     _notAttempted = _notAttempted - 1;
@@ -339,8 +338,8 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               },
               child: OptionTile(
                   option: "D",
-                  description: widget.questionModel.option4,
-                  correctAnswer: widget.questionModel.correctAnswer,
+                  description: widget.questionModel.o4,
+                  correctAnswer: widget.questionModel.answer,
                   optionSelected: optionSelected),
             ),
             SizedBox(height: 20)

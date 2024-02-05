@@ -2,11 +2,10 @@ class QuestionModel{
 
   String questionId="";
   String question="";
-  String option1="";
-  String option2="";
-  String option3="";
-  String option4="";
-  String correctAnswer="";
+  String answer="";
+  String o2="";
+  String o3="";
+  String o4="";
   String correctOption="";
   bool answered = false;
 }
