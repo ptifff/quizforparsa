@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         '/splash_screen': (context) => SplashScreen(),
         '/gatherknowledge_admin': (context) => GatherKnowledgeAdmin(),
          '/home': (context) => Home(),
-        // '/home_student': (context) => HomeStudent(),
+        '/home_student': (context) => HomeStudent(),
 
         '/gatherknowledge_user': (context) => GatherKnowledgeUser(),
          '/testknowledge_user': (context) => TestKnowledgeUser(),
