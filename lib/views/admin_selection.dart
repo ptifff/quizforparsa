@@ -15,7 +15,9 @@ class AdminPanel extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Lets Learn Together'),
+        title: Text('Lets Learn Together',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false, // Set to false to remove the back button
         backgroundColor: Colors.blue,
@@ -24,7 +26,9 @@ class AdminPanel extends StatelessWidget {
         actions: [IconButton(onPressed: (){
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
         },
-            icon: Icon(Icons.logout))],
+            icon: Icon(Icons.logout),
+          color: Colors.white, // Set icon color to white
+        )],
       ),
       body: Container(
         color: Colors.white,
@@ -84,7 +88,7 @@ class PanelCard extends StatelessWidget {
   void _handlePanelTap(BuildContext context) {
     if (label == 'Create Articles') {
       // Navigate to the "Gather Knowledge" screen or perform your action.
-      Navigator.pushNamed(context, '/gatherknowledge_admin');
+      Navigator.pushNamed(context, '/admin_lecture');
 
     } else if (label == 'Create Quiz') {
       // Navigate to the "Test Knowledge" screen or perform your action.

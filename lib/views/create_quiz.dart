@@ -54,7 +54,9 @@ class _CreateQuizState extends State<CreateQuiz> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Lets Learn Together'),
+        title: Text('Lets Learn Together',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
         centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: 0.0,

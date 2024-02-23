@@ -86,7 +86,12 @@ class StudentResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Results'),
+        title: Text('Result',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        elevation: 0.0,
       ),
       body: Center(
         child: Column(

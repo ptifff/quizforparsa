@@ -83,7 +83,9 @@ class _HomeStudentState extends State<HomeStudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lets Learn Together'),
+        title: Text('Lets Learn Together',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
         centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: 0.0,

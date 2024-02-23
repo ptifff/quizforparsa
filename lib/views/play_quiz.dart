@@ -110,7 +110,9 @@ class _PlayQuizState extends State<PlayQuiz> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lets Learn Together'),
+        title: Text('Lets Learn Together',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
         centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: 0.0,
@@ -130,17 +132,24 @@ class _PlayQuizState extends State<PlayQuiz> {
                 height: 10,
               ),
               querySnapshot.docs.isEmpty
-                  ? Container(
-                child: Center(
-                  child: Text(
-                    "No Question Available",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              )
+                  ? Row(
+                
+                    children: [
+                      Flexible(
+                        child: Container(
+                                        child: Center(
+                        child: Text(
+                          "No Question Available",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.red,
+                          ),
+                        ),
+                                        ),
+                                      ),
+                      ),
+                    ],
+                  )
                   : ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 shrinkWrap: true,
@@ -165,7 +174,11 @@ class _PlayQuizState extends State<PlayQuiz> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.done_outline_sharp),
+        backgroundColor: Colors.blue, // Set background color to blue
+
+        child: Icon(Icons.done_outline_sharp,
+          color: Colors.white, // Set icon color to white
+        ),
         onPressed: () {
           Navigator.pushReplacement(
             context,

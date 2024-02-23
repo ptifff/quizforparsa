@@ -52,7 +52,9 @@ class TopicSelection extends StatelessWidget {
       //   ),
       // ),
       appBar: AppBar(
-        title: Text('Lets Learn Together'),
+        title: Text('Lets Learn Together',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false, // Set to false to remove the back button
         backgroundColor: Colors.blue,
@@ -128,7 +130,7 @@ class PanelCard extends StatelessWidget {
   void _handlePanelTap(BuildContext context) {
     if (label == 'Article') {
       // Navigate to the "Gather Knowledge" screen or perform your action.
-      Navigator.pushNamed(context, '/gatherknowledge_user');
+      Navigator.pushNamed(context, '/user_articles');
     } else if (label == 'Quiz') {
       // Navigate to the "Test Knowledge" screen or perform your action.
       Navigator.pushNamed(context, '/home_student');

@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'helper/functions.dart';
+import 'views/admin_lecture.dart';
 import 'views/home_student.dart';
 import 'views/login.dart';
 import 'views/splash_screen.dart';
+import 'views/user_articles.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,12 +58,15 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/splash_screen': (context) => SplashScreen(),
         '/gatherknowledge_admin': (context) => GatherKnowledgeAdmin(),
-         '/home': (context) => Home(),
+        '/admin_lecture': (context) => AdminLectureUploads(),
+
+        '/home': (context) => Home(),
         '/home_student': (context) => HomeStudent(),
 
         '/gatherknowledge_user': (context) => GatherKnowledgeUser(),
          '/testknowledge_user': (context) => TestKnowledgeUser(),
         '/testknowledge_user': (context) => TestKnowledgeUser(),
+        '/user_articles': (context) => UserLecture(),
 
       },
 

@@ -80,9 +80,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lets Learn Together'),
+        title: Text('Lets Learn Together',
+          style: TextStyle(color: Colors.white), // Set text color to white
+        ),
         centerTitle: true,
         backgroundColor: Colors.blue,
+
         elevation: 0.0,
 
         actions: [
@@ -103,7 +106,10 @@ class _HomeState extends State<Home> {
       )
           : quizList(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.add,
+          color: Colors.white, // Set icon color to white
+        ),
         onPressed: () {
           Navigator.push(
             context,
