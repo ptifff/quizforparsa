@@ -35,6 +35,16 @@ class DatabaseService {
     });
   }
 
+  Future<void> deleteQuiz(String quizId) async {
+    await FirebaseFirestore.instance
+        .collection("Quiz")
+        .doc(quizId)
+        .delete()
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
   Future<void> deleteQuizData(String quizId) async {
     await FirebaseFirestore.instance
         .collection("Quiz")
@@ -59,6 +69,22 @@ class DatabaseService {
       print("Error adding question: $e");
     }
   }
+  Future<void> deleteQuestion(String quizId, String questionId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("Quiz")
+          .doc(quizId)
+          .collection("QNA")
+          .doc(questionId)
+          .delete();
+      print("Question deleted successfully!");
+    } catch (e) {
+      print("Error deleting question: $e");
+      throw e; // Rethrow the exception so it can be caught in the _deleteQuestion method
+    }
+  }
+
+
   Future<void> updateQuestionData(
       Map<String, dynamic> questionData, String quizId, String questionId) async {
     await FirebaseFirestore.instance

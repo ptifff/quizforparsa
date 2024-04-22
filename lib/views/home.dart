@@ -1,9 +1,7 @@
-import 'package:demo_flutter/views/play_quiz.dart';
-import 'package:demo_flutter/views/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../helper/functions.dart';
+import 'package:demo_flutter/views/play_quiz.dart';
+import 'package:demo_flutter/views/signin.dart';
 import '../services/auth.dart';
 import '../services/database.dart';
 import '../widgets/widgets.dart';
@@ -17,11 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Stream quizStream = Stream.empty();
-
-  // AuthService _authService = new AuthService();
-
   DatabaseService _databaseService = new DatabaseService(uid: '', email: '');
-
   bool _isLoading = true;
 
   Future<void> _initializeData() async {
@@ -62,11 +56,43 @@ class _HomeState extends State<Home> {
                 title: quizData?["quizTitle"] ?? "",
                 description: quizData?["quizDescription"] ?? "",
                 quizId: quizData?["quizId"] ?? "",
+                onDelete: () {
+                  _deleteQuiz(quizData?["quizId"]);
+                },
               );
             },
           );
         },
       ),
+    );
+  }
+
+  void _deleteQuiz(String? quizId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Delete Quiz"),
+          content: Text("Are you sure you want to delete this quiz?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                if (quizId != null) {
+                  _databaseService.deleteQuiz(quizId);
+                }
+                Navigator.of(context).pop();
+              },
+              child: Text("Yes"),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -80,18 +106,22 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lets Learn Together',
-          style: TextStyle(color: Colors.white), // Set text color to white
+        title: Text(
+          'Lets Learn Together',
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.blue,
-
         elevation: 0.0,
-
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SignInScreen()),
+              );
             },
             icon: Icon(
               Icons.exit_to_app,
@@ -107,8 +137,9 @@ class _HomeState extends State<Home> {
           : quizList(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
-        child: Icon(Icons.add,
-          color: Colors.white, // Set icon color to white
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
         ),
         onPressed: () {
           Navigator.push(
@@ -126,12 +157,14 @@ class QuizTile extends StatelessWidget {
   final String title;
   final String description;
   final String quizId;
+  final VoidCallback onDelete;
 
   QuizTile({
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.quizId,
+    required this.onDelete,
   });
 
   @override
@@ -187,6 +220,15 @@ class QuizTile extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: IconButton(
+                icon: Icon(Icons.delete),
+                color: Colors.white,
+                onPressed: onDelete,
               ),
             ),
           ],

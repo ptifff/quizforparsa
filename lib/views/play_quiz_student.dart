@@ -39,24 +39,13 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
 
     if (data != null) {
       questionModel.question = data["question"] as String;
-
-      List<String> options = [
-        data["answer"] as String,
-        data["o2"] as String,
-        data["o3"] as String,
-        data["o4"] as String,
-      ];
-      options.shuffle();
-
-      questionModel.answer = options[0];
-      questionModel.o2 = options[1];
-      questionModel.o3 = options[2];
-      questionModel.o4 = options[3];
-
+      questionModel.answer = data["answer"] as String;
+      questionModel.o2 = data["o2"] as String;
+      questionModel.o3 = data["o3"] as String;
+      questionModel.o4 = data["o4"] as String;
       questionModel.correctOption = data["answer"] as String;
       questionModel.answered = false;
     }
-
     return questionModel;
   }
 
@@ -109,88 +98,95 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Lets Learn Together',
-          style: TextStyle(color: Colors.white), // Set text color to white
+    return WillPopScope(
+      onWillPop: () async {
+        // Navigate to the home page when the back button is pressed
+        Navigator.pushReplacementNamed(context, '/home_student');
+        return false; // Returning true would allow the back navigation to proceed
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Lets Learn Together',
+            style: TextStyle(color: Colors.white), // Set text color to white
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          elevation: 0.0,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        elevation: 0.0,
-      ),
-      body: _isLoading
-          ? Container(
-        child: Center(child: CircularProgressIndicator()),
-      )
-          : SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              InfoHeader(
-                length: querySnapshot.docs.length,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              querySnapshot.docs.isEmpty
-                  ? Row(
-                    children: [
-                      Flexible(
-                        child: Container(
-                                        child: Center(
-                        child: Text(
-                          "No Question Available",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.red,
+        body: _isLoading
+            ? Container(
+          child: Center(child: CircularProgressIndicator()),
+        )
+            : SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                InfoHeader(
+                  length: querySnapshot.docs.length,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                querySnapshot.docs.isEmpty
+                    ? Row(
+                      children: [
+                        Flexible(
+                          child: Container(
+                                          child: Center(
+                          child: Text(
+                            "No Question Available",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.red,
+                            ),
                           ),
-                        ),
+                                          ),
                                         ),
-                                      ),
-                      ),
-                    ],
-                  )
-                  : ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
-                itemCount: querySnapshot.docs.length,
-                itemBuilder: (context, index) {
-                  return QuizPlayTile(
-                    questionModel: getQuestionModelFromSnapshot(
-                        querySnapshot.docs[index]),
-                    index: index,
-                    optionSelected: _optionSelected[index],
-                    onOptionSelect: (option) {
-                      setState(() {
-                        _optionSelected[index] = option;
-                      });
-                    },
-                  );
-                },
-              ),
-            ],
+                        ),
+                      ],
+                    )
+                    : ListView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemCount: querySnapshot.docs.length,
+                  itemBuilder: (context, index) {
+                    return QuizPlayTile(
+                      questionModel: getQuestionModelFromSnapshot(
+                          querySnapshot.docs[index]),
+                      index: index,
+                      optionSelected: _optionSelected[index],
+                      onOptionSelect: (option) {
+                        setState(() {
+                          _optionSelected[index] = option;
+                        });
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue, // Set background color to blue
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue, // Set background color to blue
 
-        child: Icon(Icons.done_outline_sharp,
-          color: Colors.white, // Set icon color to white
-        ),
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => StudentResult(
-                total: total,
-                questions: questions,
-                optionSelected: _optionSelected,
+          child: Icon(Icons.done_outline_sharp,
+            color: Colors.white, // Set icon color to white
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentResult(
+                  total: total,
+                  questions: questions,
+                  optionSelected: _optionSelected,
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -343,46 +339,36 @@ class OptionTile extends StatelessWidget {
       onTap: () {
         onTap();
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: isSelected ? Colors.blue : Colors.grey,
-            width: 1.5,
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color: isSelected ? Colors.blue : Colors.grey,
+                width: 1.5,
+              ),
+            ),
+            child: Text(
+              option,
+              style: TextStyle(
+                color: isSelected ? Colors.blue : Colors.grey,
+                fontSize: 16,
+              ),
+            ),
           ),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(
-                  color: isSelected ? Colors.blue : Colors.grey,
-                  width: 1.5,
-                ),
-              ),
-              child: Text(
-                option,
-                style: TextStyle(
-                  color: isSelected ? Colors.blue : Colors.grey,
-                  fontSize: 16,
-                ),
+          SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black87,
               ),
             ),
-            SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                description,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

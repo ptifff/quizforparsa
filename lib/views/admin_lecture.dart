@@ -66,8 +66,16 @@ class _AdminLectureUploadsState extends State<AdminLectureUploads> {
 
   void getAllPdf() async {
     final results = await _firebaseFirestore.collection("pdfs").get();
-    pdfData = results.docs.map((e) => e.data() as Map<String, dynamic>).toList();
+    pdfData = results.docs.map((doc) => {
+      "id": doc.id, // Add document ID
+      ...doc.data() as Map<String, dynamic>, // Add other data
+    }).toList();
     setState(() {});
+  }
+
+  void deletePdf(String documentId) async {
+    await _firebaseFirestore.collection("pdfs").doc(documentId).delete();
+    getAllPdf(); // Refresh the UI after deletion
   }
 
   @override
@@ -81,12 +89,13 @@ class _AdminLectureUploadsState extends State<AdminLectureUploads> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Articles', style: TextStyle(
-          color: Colors.white, // Set app bar text color to white
-        ),
+        title: const Text(
+          'Articles',
+          style: TextStyle(
+            color: Colors.white, // Set app bar text color to white
+          ),
         ),
         backgroundColor: Colors.blue,
-
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -110,26 +119,63 @@ class _AdminLectureUploadsState extends State<AdminLectureUploads> {
                         ),
                       );
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                            "assets/pdf.jpeg", // Replace with the correct image path
-                            height: 100,
-                            width: 100,
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(),
                           ),
-                          Text(
-                            pdfData[index]["name"] ?? "Pdf Name",
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(
+                                "assets/pdf.jpeg", // Replace with the correct image path
+                                height: 100,
+                                width: 100,
+                              ),
+                              Text(
+                                pdfData[index]["name"] ?? "Pdf Name",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Positioned(
+                          top: 5,
+                          right: 5,
+                          child: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Delete Article"),
+                                    content: Text("Are you sure you want to delete this article?"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text("Cancel"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text("Delete"),
+                                        onPressed: () {
+                                          deletePdf(pdfData[index]["id"]);
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );
