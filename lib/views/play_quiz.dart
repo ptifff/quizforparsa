@@ -271,8 +271,8 @@ class _InfoHeaderState extends State<InfoHeader> {
               : Container();
         });
   }
-}
 
+}
 class QuizPlayTile extends StatefulWidget {
   final QuestionModel questionModel;
   final int index;
@@ -293,6 +293,24 @@ class QuizPlayTile extends StatefulWidget {
 }
 
 class _QuizPlayTileState extends State<QuizPlayTile> {
+  late List<String> _descriptions;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize descriptions with the question's options
+    _descriptions = [
+      widget.questionModel.answer ?? '',
+      widget.questionModel.o2 ?? '',
+      widget.questionModel.o3 ?? '',
+      widget.questionModel.o4 ?? '',
+    ];
+    // Remove empty descriptions
+    _descriptions.removeWhere((description) => description.isEmpty);
+    // Shuffle the descriptions
+    _descriptions.shuffle();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -304,7 +322,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
             children: [
               Expanded(
                 child: Text(
-                  "Q${widget.index + 1} ${widget.questionModel.question}",
+                  "Q${widget.index + 1} ${widget.questionModel.question ?? ''}",
                   style: TextStyle(fontSize: 18, color: Colors.black87),
                 ),
               ),
@@ -315,45 +333,17 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
             ],
           ),
           SizedBox(height: 12),
-          OptionTile(
-            option: "A",
-            description: widget.questionModel.answer,
-            correctAnswer: widget.questionModel.answer,
-            optionSelected: widget.optionSelected,
-            onTap: () {
-              widget.onOptionSelect(widget.questionModel.answer);
-            },
-          ),
-          SizedBox(height: 4),
-          OptionTile(
-            option: "B",
-            description: widget.questionModel.o2,
-            correctAnswer: widget.questionModel.answer,
-            optionSelected: widget.optionSelected,
-            onTap: () {
-              widget.onOptionSelect(widget.questionModel.o2);
-            },
-          ),
-          SizedBox(height: 4),
-          OptionTile(
-            option: "C",
-            description: widget.questionModel.o3,
-            correctAnswer: widget.questionModel.answer,
-            optionSelected: widget.optionSelected,
-            onTap: () {
-              widget.onOptionSelect(widget.questionModel.o3);
-            },
-          ),
-          SizedBox(height: 4),
-          OptionTile(
-            option: "D",
-            description: widget.questionModel.o4,
-            correctAnswer: widget.questionModel.answer,
-            optionSelected: widget.optionSelected,
-            onTap: () {
-              widget.onOptionSelect(widget.questionModel.o4);
-            },
-          ),
+          // Generate option tiles dynamically based on the descriptions
+          for (int i = 0; i < _descriptions.length; i++)
+            OptionTile(
+              option: String.fromCharCode(65 + i), // Convert index to letter (A, B, C, ...)
+              description: _descriptions[i],
+              correctAnswer: widget.questionModel.answer ?? '',
+              optionSelected: widget.optionSelected,
+              onTap: () {
+                widget.onOptionSelect(_descriptions[i]);
+              },
+            ),
           SizedBox(height: 20)
         ],
       ),

@@ -75,6 +75,10 @@ import 'home_student.dart';
 //     );
 //   }
 // }
+import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart';
+
 class StudentResult extends StatelessWidget {
   final int total;
   final List<Map<String, String>> questions; // Receive list of questions with correct answers
@@ -101,16 +105,17 @@ class StudentResult extends StatelessWidget {
           elevation: 0.0,
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Total Questions: $total',
-              ),
-              SizedBox(height: 20),
-              SingleChildScrollView(
-                child: ListView.builder(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Total Questions: $total',
+                ),
+                SizedBox(height: 20),
+                ListView.builder(
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: total,
                   itemBuilder: (context, index) {
                     bool isCorrect = optionSelected[index] == questions[index]['correctOption'];
@@ -136,8 +141,8 @@ class StudentResult extends StatelessWidget {
                     );
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
