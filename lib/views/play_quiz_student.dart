@@ -92,42 +92,6 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
     }
   }
 
-  void _deleteQuestion(String questionId) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Delete Question"),
-          content: Text("Are you sure you want to delete this question?"),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () async {
-                try {
-                  await _databaseService.deleteQuestion(widget.quizId, questionId);
-                  setState(() {
-                    // Update the local state after deleting the question
-                    questions.removeWhere((question) => question['questionId'] == questionId);
-                    _optionSelected.removeAt(questions.indexWhere((question) => question['questionId'] == questionId));
-                    total = questions.length;
-                  });
-                  Navigator.of(context).pop(); // Close the AlertDialog
-                } catch (e) {
-                  print("Error deleting question: $e");
-                }
-              },
-              child: Text("Yes"),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +159,7 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
                         });
                       },
                       onDelete: () {
-                        _deleteQuestion(querySnapshot.docs[index].id);
+
                       },
                     );
                   },
@@ -328,10 +292,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
                   style: TextStyle(fontSize: 18, color: Colors.black87),
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: widget.onDelete,
-              ),
+
             ],
           ),
           SizedBox(height: 12),
